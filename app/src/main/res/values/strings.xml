@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Chit_Chat</string>
+    <string name="logout">Logout</string>
+    <string name="welcome_msg">Welcome to Chit Chat</string>
+    <string name="login_button">Login To Account</string>
+    <string name="create_an_account_botton">Create An Account</string>
+    <string name="create_account_button">Create Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account_settings">Account Settings</string>
+</resources>

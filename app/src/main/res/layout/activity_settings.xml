@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_5"
+    tools:context=".SettingsActivity">
+
+    <include
+        android:id="@+id/accountToolBar"
+        layout="@layout/app_bar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/accountImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/avtar_image3" />
+
+    <TextView
+        android:id="@+id/accountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountImage"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:text="Display Name"
+        android:textColor="@color/black"
+        android:textSize="27sp"/>
+
+    <TextView
+        android:id="@+id/accountStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountName"
+        android:layout_marginTop="7dp"
+        android:layout_centerHorizontal="true"
+        android:text="Hi there, I'm Using Chit Chat App"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/accountChangeImageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountStatus"
+        android:layout_marginTop="110dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_layout"
+        android:backgroundTint="@color/Eerie_Black"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="CHANGE IMAGE"
+        android:textColor="@color/white"
+        android:textSize="19sp"  />
+
+    <Button
+        android:id="@+id/accountChangeStatusBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountChangeImageBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_layout"
+        android:backgroundTint="@color/Red"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="CHANGE STATUS"
+        android:textColor="@color/white"
+        android:textSize="19sp" />
+
+
+</RelativeLayout>
