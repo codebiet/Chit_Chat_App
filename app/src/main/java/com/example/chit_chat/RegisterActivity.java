@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap <String, String> usersMap = new HashMap<>();
                             usersMap.put("name",displayName);
                             usersMap.put("status","Hi there, I'm Using Chit Chat App");
-                            usersMap.put("image","default");
+                            usersMap.put("image","https://firebasestorage.googleapis.com/v0/b/chit-chat-8862a.appspot.com/o/Profile_Image%2FA2wnzbydrscA4C1079qvbN1LJLE3.jpg?alt=media&token=08e9d083-f59f-46c8-8a29-f6611a72ce25");
                             usersMap.put("thumb_image","default");
 
                             mDatabase.setValue(usersMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -83,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
             Intent accountSettingIntent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(accountSettingIntent);
         }
+        if(item.getItemId() == R.id.mainAllUserBtn){
+            Intent allUsersIntent = new Intent(MainActivity.this, UsersActivity.class);
+            startActivity(allUsersIntent);
+        }
 
         return true;
     }

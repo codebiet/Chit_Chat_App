@@ -27,7 +27,8 @@
         android:layout_height="150dp"
         android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/avtar_image3" />
+        tools:src="@drawable/avtar_image3"
+         />
 
     <TextView
         android:id="@+id/accountName"

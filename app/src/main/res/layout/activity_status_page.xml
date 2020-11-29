@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Backgroung_Green"
+    android:background="@color/Background_Green"
     tools:context=".StatusPageActivity">
 
 
@@ -12,6 +12,11 @@
         android:id="@+id/statusToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/Blur_Black"/>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/statusText"
