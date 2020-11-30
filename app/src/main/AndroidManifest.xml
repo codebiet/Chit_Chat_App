@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Chit_Chat">
+        android:theme="@style/Theme.Chit_Chat"
+        android:name=".Chit_Chat">
         <activity android:name=".ProfileActivity"></activity>
         <activity
             android:name=".UsersActivity"

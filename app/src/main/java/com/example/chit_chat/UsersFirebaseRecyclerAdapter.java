@@ -69,10 +69,4 @@ public class UsersFirebaseRecyclerAdapter extends FirebaseRecyclerAdapter<Users,
 
         }
     }
-
-//    public void IntentCaller(String userId){
-//        Intent profileIntent = new Intent(,ProfileActivity.class);
-//        profileIntent.putExtra("userId",userId);
-//        startActivity(profileIntent);
-//    }
 }

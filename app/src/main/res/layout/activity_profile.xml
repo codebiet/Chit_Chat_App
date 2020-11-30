@@ -62,7 +62,7 @@
             android:backgroundTint="@color/Persian_Blue"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
-            android:text="Sent Friend Request"
+            android:text="Send Friend Request"
             android:textColor="@color/white"
             android:textSize="19sp" />
 
