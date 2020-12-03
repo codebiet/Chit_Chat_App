@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -84,11 +86,14 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            assert currentUser != null;
                             String Uid = currentUser.getUid();
+                            String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
                             mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(Uid);
 
                             HashMap <String, String> usersMap = new HashMap<>();
+                            usersMap.put("deviceToken",deviceToken);
                             usersMap.put("name",displayName);
                             usersMap.put("status","Hi there, I'm Using Chit Chat App");
                             usersMap.put("image","https://firebasestorage.googleapis.com/v0/b/chit-chat-8862a.appspot.com/o/Profile_Image%2FA2wnzbydrscA4C1079qvbN1LJLE3.jpg?alt=media&token=08e9d083-f59f-46c8-8a29-f6611a72ce25");
