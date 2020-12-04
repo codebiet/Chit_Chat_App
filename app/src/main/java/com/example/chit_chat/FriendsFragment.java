@@ -1,5 +1,6 @@
 package com.example.chit_chat;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,7 @@ public class FriendsFragment extends Fragment {
         mCurrentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrentUserId);
+        mFriendsDatabase.keepSynced(true);
 
         mFriendsList.setHasFixedSize(true);
         mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -54,7 +56,8 @@ public class FriendsFragment extends Fragment {
                 .setQuery(mFriendsDatabase, Friends.class)
                 .build();
 
-        mAdapter = new FriendsFragmentAdapter(options);
+
+        mAdapter = new FriendsFragmentAdapter(options,getContext());
         mFriendsList.setAdapter(mAdapter);
         return mView;
     }

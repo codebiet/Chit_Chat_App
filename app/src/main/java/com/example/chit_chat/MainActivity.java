@@ -14,12 +14,15 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
 
     private ViewPager mViewPager;
     private SecctionPagerAdapter mSectionPagerAdapter;
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.mainToolBar);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Chit Chat");
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference()
+                .child("Users").child(Objects.requireNonNull(mAuth.getUid()));
 
         mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mSectionPagerAdapter = new SecctionPagerAdapter(getSupportFragmentManager());
@@ -55,8 +61,21 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentUser == null){
             sendToStartActivity();
+        }else{
+            mDatabaseRef.child("Online").setValue(true);
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser != null){
+            mDatabaseRef.child("Online").setValue(false);
+        }
+    }
+
 
     private void sendToStartActivity() {
         Intent startIntent = new Intent(MainActivity.this, StartActivity.class);

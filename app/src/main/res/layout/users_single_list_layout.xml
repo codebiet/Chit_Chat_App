@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingVertical="2.5dp"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="@drawable/button_layout"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:paddingVertical="2.5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userSingleImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/avtar_image3"/>
+        android:src="@drawable/avtar_image3" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/userSingleImage"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@id/userSingleImage">
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@id/userSingleImage"
+        android:layout_toRightOf="@id/userSingleImage"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/userSingleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Text View"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/userSingleOnlineIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@+id/userSingleName"
+            android:src="@drawable/online_green_button"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/userSingleStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/userSingleName"
             android:text="Text View"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
