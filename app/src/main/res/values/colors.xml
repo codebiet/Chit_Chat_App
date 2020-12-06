@@ -16,6 +16,10 @@
     <color name="Blur_White">#79FFFFFF</color>
     <color name="Antique_white">#FAEBD7</color>
     <color name="Background_Green">#4d8b7a</color>
+    <color name="Another_Blue">#00aae7</color>
+
+    <color name="Message_Green">#79aa00</color>
+    <color name="Message_Orange">#ff8b02</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#1B1B1B</color>
 

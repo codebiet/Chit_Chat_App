@@ -16,13 +16,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabaseRef;
+    FirebaseUser currentUser;
+    private DatabaseReference mDatabaseOnlineStatus;
 
     private ViewPager mViewPager;
     private SecctionPagerAdapter mSectionPagerAdapter;
@@ -35,14 +37,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         Toolbar mToolbar = findViewById(R.id.mainToolBar);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Chit Chat");
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference()
-                .child("Users").child(Objects.requireNonNull(mAuth.getUid()));
-
+        if(mAuth.getCurrentUser() != null){
+            mDatabaseOnlineStatus = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser.getUid());
+        }
         mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mSectionPagerAdapter = new SecctionPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionPagerAdapter);
@@ -57,22 +60,20 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
             sendToStartActivity();
         }else{
-            mDatabaseRef.child("Online").setValue(true);
+            mDatabaseOnlineStatus.child("Online").setValue("true");
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null){
-            mDatabaseRef.child("Online").setValue(false);
+            mDatabaseOnlineStatus.child("Online").setValue(ServerValue.TIMESTAMP);
         }
     }
 

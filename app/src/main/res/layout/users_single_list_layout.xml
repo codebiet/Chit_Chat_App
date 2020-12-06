@@ -36,7 +36,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@+id/userSingleName"
-            android:src="@drawable/online_green_button"
+            android:src="@drawable/online_green_button_2"
+            android:background="@color/white"
             android:visibility="invisible"/>
 
         <TextView

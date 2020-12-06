@@ -3,6 +3,7 @@ package com.example.chit_chat;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +52,12 @@ public class FriendsFragmentAdapter extends FirebaseRecyclerAdapter <Friends, Fr
 
                 String displayName = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
                 String displayImage = Objects.requireNonNull(snapshot.child("image").getValue()).toString();
-                Boolean displayOnlineIcon = (Boolean) Objects.requireNonNull(snapshot.child("Online").getValue());
+                String displayOnlineIcon = Objects.requireNonNull(snapshot.child("Online").getValue()).toString();
 
                 friendsHolder.friendName.setText(displayName);
                 Picasso.get().load(displayImage).placeholder(R.drawable.avtar_image3).into(friendsHolder.friendImage);
 
-                if (displayOnlineIcon){
+                if (displayOnlineIcon.equals("true")){
                     friendsHolder.friendOnlineIcon.setVisibility(View.VISIBLE);
                 }else{
                     friendsHolder.friendOnlineIcon.setVisibility(View.INVISIBLE);
@@ -74,8 +75,20 @@ public class FriendsFragmentAdapter extends FirebaseRecyclerAdapter <Friends, Fr
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+                                if(which == 0) {
+                                    Intent profileIntent = new Intent(context, ProfileActivity.class);
+                                    profileIntent.putExtra("userId", listUserId);
+                                    context.startActivity(profileIntent);
+                                }
+
+                                else if(which == 1){
+                                    Intent chatIntent = new Intent(context, ChatActivity.class);
+                                    chatIntent.putExtra("userId", listUserId);
+                                    context.startActivity(chatIntent);
+                                }
                             }
                         });
+                        builder.show();
 
                     }
                 });

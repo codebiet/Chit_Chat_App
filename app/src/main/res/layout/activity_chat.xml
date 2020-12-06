@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatActivity">
+
+    <include layout="@layout/app_bar_layout"
+        android:id="@+id/chatAppBar"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeMessageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/chatAppBar"
+        android:layout_above="@+id/txtLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatMessagesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/txtLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/pickImageBtn"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/button_layout"
+            android:backgroundTint="@color/Eerie_Black"
+            android:src="@drawable/baseline_insert_photo_white_18dp"
+            android:contentDescription="TODO"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/messageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/pickImageBtn"
+            android:layout_toLeftOf="@+id/sendMessageBtn"
+            android:layout_marginHorizontal="2dp"
+            android:background="@drawable/button_layout"
+            android:backgroundTint="@color/Blur_Black"
+            android:hint="Type a message..."
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_toEndOf="@+id/pickImageBtn"
+            android:layout_toStartOf="@+id/sendMessageBtn" />
+
+        <ImageButton
+            android:id="@+id/sendMessageBtn"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_layout"
+            android:backgroundTint="@color/Another_Blue"
+            android:src="@drawable/baseline_send_white_18dp"
+            android:contentDescription="TODO"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

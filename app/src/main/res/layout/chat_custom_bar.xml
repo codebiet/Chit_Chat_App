@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/customBarImage"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/avtar_image3"/>
+
+    <TextView
+        android:id="@+id/customBarDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/customBarImage"
+        android:layout_marginLeft="10dp"
+        android:text="Display Name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_toEndOf="@+id/customBarImage"
+        android:layout_marginStart="10dp" />
+    <TextView
+        android:id="@+id/customBarLastSeenStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/customBarImage"
+        android:layout_below="@+id/customBarDisplayName"
+        android:layout_marginLeft="10dp"
+        android:text="Last Seen"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:layout_toEndOf="@+id/customBarImage"
+        android:layout_marginStart="10dp" />
+
+
+
+
+
+</RelativeLayout>

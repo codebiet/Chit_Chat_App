@@ -68,9 +68,6 @@ import id.zelory.compressor.Compressor;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        System.out.println("Entering in the activity");
-
-
         Toolbar mToolbar = findViewById(R.id.accountToolBar);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Account Settings");
