@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -63,8 +64,8 @@ import id.zelory.compressor.Compressor;
      private static final int galleryPicker = 1;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -155,6 +156,19 @@ import id.zelory.compressor.Compressor;
         });
 
     }
+
+     @Override
+     protected void onStart() {
+         super.onStart();
+
+         mUserDatabase.child("Online").setValue("true");
+     }
+
+     @Override
+     protected void onStop() {
+         super.onStop();
+//         mUserDatabase.child("Online").setValue(ServerValue.TIMESTAMP);
+     }
 
      @Override
      protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

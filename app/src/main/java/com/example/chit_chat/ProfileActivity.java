@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -146,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     if(snapshot.hasChild(userId)){
 
                                         mCurrentState = 3;
-                                        mFriendRequestBtn.setText("Unfriend");
+                                        mFriendRequestBtn.setText("UnFriend");
                                         mRequestDeclineBtn.setVisibility(View.INVISIBLE);
                                         mRequestDeclineBtn.setEnabled(false);
 
@@ -178,6 +179,38 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
+
+
+
+        mRequestDeclineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mRequestDeclineBtn.setEnabled(false);
+                mRequestDeclineBtn.setVisibility(View.INVISIBLE);
+
+                Map cancelRequestMap = new HashMap();
+                cancelRequestMap.put("Friend_Request/" + mCurrentUser.getUid() + "/" + userId, null);
+                cancelRequestMap.put("Friend_Request/" + userId + "/" + mCurrentUser.getUid(), null);
+
+                mRootRef.updateChildren(cancelRequestMap, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
+                        if (error == null) {
+
+                            mCurrentState = 0;
+                            mFriendRequestBtn.setText("Send Friend Request");
+//                                            mFriendRequestBtn.setBackgroundColor(Color.parseColor("#1261A0"));
+
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Failed to Cancel Request", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
+
 
 
 //        =========================WHEN BUTTON IS CLICKED===========================================
@@ -288,12 +321,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-//            ----------------------------UNFRIEND---------------------------------
+//            ----------------------------UN FRIEND---------------------------------
                 if(mCurrentState == 3){
 
                     Map unFriendMap = new HashMap();
                     unFriendMap.put("Friends/" + mCurrentUser.getUid() + "/" + userId, null);
                     unFriendMap.put("Friends/" + userId + "/" + mCurrentUser.getUid(), null);
+
+                    unFriendMap.put("messages/" + mCurrentUser.getUid() + "/" + userId, null);
+                    unFriendMap.put("messages/" + userId + "/" + mCurrentUser.getUid(), null);
 
                     mRootRef.updateChildren(unFriendMap, new DatabaseReference.CompletionListener() {
                         @Override
@@ -318,6 +354,20 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mRootRef.child("Users").child(mCurrentUser.getUid()).child("Online").setValue("true");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+//        mRootRef.child("Users").child(mCurrentUser.getUid()).child("Online").setValue(ServerValue.TIMESTAMP);
     }
 }
 

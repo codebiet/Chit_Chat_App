@@ -3,62 +3,85 @@ package com.example.chit_chat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import java.util.Objects;
+
 public class ChatFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView mList;
 
-    public ChatFragment() {
-        // Required empty public constructor
-    }
+    private ChatFragmentAdapter mAdapter;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChatFragment newInstance(String param1, String param2) {
-        ChatFragment fragment = new ChatFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private DatabaseReference mDatabase;
+//    private DatabaseReference mChatDatabase;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private FirebaseAuth mAuth;
+
+    private String mCurrentUserId;
+
+    private View mView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        mView = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        mList = mView.findViewById(R.id.chatRecyclerView);
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+//        mChatDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrentUserId);
+//        mChatDatabase.keepSynced(true);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("chat_messages").child(mCurrentUserId);
+        mDatabase.keepSynced(true);
+
+        Query conservationQuery = mDatabase.orderByChild("timeStamp");
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+
+        mList.setHasFixedSize(true);
+        mList.setLayoutManager(linearLayoutManager);
+
+        FirebaseRecyclerOptions<Friends> options
+                = new FirebaseRecyclerOptions.Builder<Friends>()
+                .setQuery(conservationQuery, Friends.class)
+                .build();
+
+
+        mAdapter = new ChatFragmentAdapter(options,getContext());
+        mList.setAdapter(mAdapter);
+
+        return  mView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAdapter.startListening();
+    }
+
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        mAdapter.stopListening();
     }
 }

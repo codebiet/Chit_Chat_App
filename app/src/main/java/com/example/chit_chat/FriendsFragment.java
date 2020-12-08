@@ -23,11 +23,11 @@ public class FriendsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private RecyclerView mFriendsList;
+    private RecyclerView mList;
 
     private FriendsFragmentAdapter mAdapter;
 
-    private DatabaseReference mFriendsDatabase;
+    private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
     private String mCurrentUserId;
@@ -40,25 +40,25 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_friends,container, false);
 
-        mFriendsList = mView.findViewById(R.id.friendRecyclerView);
+        mList = mView.findViewById(R.id.friendRecyclerView);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrentUserId);
-        mFriendsDatabase.keepSynced(true);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrentUserId);
+        mDatabase.keepSynced(true);
 
-        mFriendsList.setHasFixedSize(true);
-        mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mList.setHasFixedSize(true);
+        mList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseRecyclerOptions<Friends> options
                 = new FirebaseRecyclerOptions.Builder<Friends>()
-                .setQuery(mFriendsDatabase, Friends.class)
+                .setQuery(mDatabase, Friends.class)
                 .build();
 
 
         mAdapter = new FriendsFragmentAdapter(options,getContext());
-        mFriendsList.setAdapter(mAdapter);
+        mList.setAdapter(mAdapter);
         return mView;
     }
     @Override

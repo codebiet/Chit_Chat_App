@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class StatusPageActivity extends AppCompatActivity {
 
@@ -87,4 +88,17 @@ public class StatusPageActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mStatusDatabase.child("Online").setValue("true");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        mStatusDatabase.child("Online").setValue(ServerValue.TIMESTAMP);
+    }
 }
+

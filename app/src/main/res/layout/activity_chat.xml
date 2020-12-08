@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/social_media_icons_pattern_doodle"
     tools:context=".ChatActivity">
 
     <include layout="@layout/app_bar_layout"

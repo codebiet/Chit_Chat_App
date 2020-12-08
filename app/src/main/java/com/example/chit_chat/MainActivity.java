@@ -23,7 +23,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+    private FirebaseUser currentUser;
     private DatabaseReference mDatabaseOnlineStatus;
 
     private ViewPager mViewPager;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         if(currentUser != null){
-            mDatabaseOnlineStatus.child("Online").setValue(ServerValue.TIMESTAMP);
+//            mDatabaseOnlineStatus.child("Online").setValue(ServerValue.TIMESTAMP);
         }
     }
 

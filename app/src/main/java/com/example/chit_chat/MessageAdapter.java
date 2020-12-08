@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,6 +46,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
 
         Messages c = mMessagesList.get(position);
+        String messageType = c.getType();
+
+        if(messageType.equals("text")){
+            holder.messageText.setText(c.getMessage());
+            holder.messageImage.setVisibility(View.INVISIBLE);
+        }else{
+            holder.messageText.setVisibility(View.INVISIBLE);
+            Picasso.get().load(c.getMessage()).placeholder(R.drawable.avtar_image3).into(holder.messageImage);
+        }
 ////        mAuth = FirebaseAuth.getInstance();
 ////        String currentUser = mAuth.getCurrentUser().getUid();
 ////        String fromUser = c.getFrom();
@@ -57,7 +68,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 //            holder.messageText.setBackgroundResource(R.drawable.receiver_message_background);
 //        }
 
-        holder.messageText.setText(c.getMessage());
 
     }
 
@@ -69,11 +79,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageText;
+        ImageView messageImage;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
 
             messageText = itemView.findViewById(R.id.textMessageId);
+            messageImage = itemView.findViewById(R.id.imageMessageId);
         }
     }
 
