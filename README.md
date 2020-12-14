@@ -16,11 +16,3 @@ This is a simple mini project of Android Chatting Application with Firebase Supp
 
 ## Links 
 * [Download Apk](https://drive.google.com/file/d/1fW5QMhFgC_KZk6BLPqxEOtEXd_VKi5UR/view?usp=sharing)
-
-## Pics
-
-![](projects_image/Welcome%20Page.jpg)
-![](projects_image/Main%20Page%20(1).jpg)
-![](projects_image/Login%20Page.jpg)
-![](projects_image/Friends%20Profile.jpg)
-![](projects_image/Chatting%20Page.jpg)
