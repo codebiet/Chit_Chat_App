@@ -14,5 +14,5 @@ This is a simple mini project of Android Chatting Application with Firebase Supp
 * Upload your profile image
 * Send Requests and build connections.
 
-## Links 
+## Link
 * [Download Apk](https://drive.google.com/file/d/1fW5QMhFgC_KZk6BLPqxEOtEXd_VKi5UR/view?usp=sharing)
